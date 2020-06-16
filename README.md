@@ -11,10 +11,10 @@ To use the controller, Ryu and networkx are essential. Install them by
   ```
 
 ## Usage
-  Run the controller by
+Run the controller by
   ``ryu-manager ryu_spf_controller.py --observe-links``
 
-  Or in the Python script for Mininet, do
+Or in the Python script for Mininet, do
   ```
   net.addController(
     name='c0',

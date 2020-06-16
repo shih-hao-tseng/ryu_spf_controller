@@ -142,7 +142,7 @@ class SPFController(app_manager.RyuApp):
 		self.arp_table[arp_src_ip] = eth_src
 		self.ip_to_datapath[arp_src_ip] = datapath
 
-		# print " ARP: %s (%s) -> %s (%s)" % (arp_src_ip, src, arp_dst_ip, dst)
+		# print(" ARP: %s (%s) -> %s (%s)" % (arp_src_ip, src, arp_dst_ip, dst))
 
 		hwtype = arp_hdr.hwtype
 		proto = arp_hdr.proto
@@ -222,11 +222,11 @@ class SPFController(app_manager.RyuApp):
 
 	def ipv4_routing(self,msg,src,dst,datapath,dpid,ofproto,parser,in_port):
 		if dst in self.net:
-			print "%s -> %s" % (src,dst)
-			print "nodes:"
-			print self.net.nodes
-			print "edges:"
-			print self.net.edges
+			print("%s -> %s" % (src,dst))
+			print("nodes:")
+			print(self.net.nodes)
+			print("edges:")
+			print(self.net.edges)
 			try:
 				path=nx.shortest_path(self.net,src,dst)
 				# install the path
@@ -253,7 +253,7 @@ class SPFController(app_manager.RyuApp):
 					else:
 						current_dp=None
 			except nx.NetworkXNoPath:
-				print "No path"
+				print("No path")
 				return
 		else:
 			out_port = ofproto.OFPP_FLOOD
