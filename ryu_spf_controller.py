@@ -234,12 +234,17 @@ class SPFController(app_manager.RyuApp):
 				current_dpid=dpid
 				current_dp=datapath
 				path_len=len(path)
+
+				return_out_port = None
 				while next_index < path_len:
 					if current_dp is None:
 						continue
 	
 					next_dpid=path[next_index]
 					out_port=self.net[current_dpid][next_dpid]['port']
+					if current_dpid == dpid:
+						return_out_port = out_port
+
 					self.add_flow(
 						datapath=current_dp,
 						dst=dst,
@@ -252,6 +257,8 @@ class SPFController(app_manager.RyuApp):
 						current_dp=self.dpid_to_datapath[current_dpid]
 					else:
 						current_dp=None
+
+				out_port = return_out_port
 			except nx.NetworkXNoPath:
 				print("No path")
 				return
